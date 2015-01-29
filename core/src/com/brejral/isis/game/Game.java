@@ -7,6 +7,7 @@ import java.util.List;
 import com.badlogic.gdx.graphics.Color;
 import com.brejral.isis.Isis;
 import com.brejral.isis.game.player.Player;
+import com.brejral.isis.game.ui.GameUIHelper;
 import com.brejral.isis.game.ui.map.GameMap;
 import com.brejral.isis.game.user.User;
 
@@ -15,6 +16,7 @@ public class Game {
 	private List<Player> players = new ArrayList<Player>();
 	private boolean isSetupPhase = true;
 	private boolean isSecondSetupRound = false;
+	private String buildType = "";
 	private List<Integer> dice = new ArrayList<Integer>();
 	
 	public Game() {
@@ -32,6 +34,7 @@ public class Game {
 	
 	private void startGame() {
 		players.get(0).setIsTurn(true);
+		buildType = "MiningShip";
 	}
 	
 	public Game(List<Player> players) {
@@ -42,12 +45,27 @@ public class Game {
 		return players;
 	}
 	
+	public String getBuildType() {
+		return buildType;
+	}
+	
+	public void setBuildType(String buildType) {
+		this.buildType = buildType;
+	}
+	
 	public int getNumberOfPlayers() {
 		return players.size();
 	}
 	
 	public GameMap getMap() {
-		return GameHelper.getMap();
+		return GameUIHelper.getMap();
+	}
+	
+	public boolean isSetupPhase() {
+		return isSetupPhase;
+	}
+	public boolean isSecondSetupRound() {
+		return isSecondSetupRound;
 	}
 	
 	public Player getCurrentPlayerForTurn() {

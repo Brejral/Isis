@@ -18,4 +18,7 @@ public class GameUIConstants {
 
 	public static int[] TRADING_STATION_INFO_5 = { 0, 0, 1, 1, 5, 0, 3, 1, 2, 6, 5, 0, 11, 4, 5, 12, 1, 2, 15, 3, 4, 16, 2, 3, 17, 3, 4 };
 	public static int[] TRADING_STATION_INFO_6 = { 0, 0, 1, 1, 5, 0, 2, 4, 5, 3, 1, 2, 11, 5, 0, 12, 0, 1, 17, 4, 5, 18, 1, 2, 26, 3, 4, 27, 2, 3, 28, 3, 4 };
+
+	public static int[] TRADING_STATION_INFO_5_POS = { 670, 160, 3, 1300, 160, 2, 360, 700, 4, 1820, 450, 2, 2120, 1000, 1, 360, 1300, 4, 1820, 1550, 0, 670, 1840, 5, 1300, 1840, 0 };
+	public static int[] TRADING_STATION_INFO_6_POS = { };
 }

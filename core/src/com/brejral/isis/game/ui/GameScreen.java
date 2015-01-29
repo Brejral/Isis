@@ -4,11 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.brejral.isis.game.Game;
 import com.brejral.isis.game.GameHelper;
-import com.brejral.isis.game.ui.info.GameInfoPanel;
 
 public class GameScreen implements Screen {
 	public static ExtendViewport VIEWPORT;
@@ -20,6 +18,7 @@ public class GameScreen implements Screen {
 		GameHelper.setGame(new Game());
 		mapStage = new GameMapStage();
 		infoStage = new GameInfoStage();
+		GameUIHelper.startGame();
 	}
 
 	public GameMapStage getGameStage() {
@@ -48,8 +47,10 @@ public class GameScreen implements Screen {
 	public void show() {
 		inputMultiplexer = new InputMultiplexer();
 		inputMultiplexer.addProcessor(new GameGestureDetector(mapStage));
+		inputMultiplexer.addProcessor(mapStage);
 		inputMultiplexer.addProcessor(infoStage);
 		Gdx.input.setInputProcessor(inputMultiplexer);
+		mapStage.scrolled(6);
 	}
 
 	@Override

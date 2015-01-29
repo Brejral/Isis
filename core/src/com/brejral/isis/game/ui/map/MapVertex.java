@@ -7,9 +7,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.brejral.isis.game.GameHelper;
+import com.brejral.isis.game.player.Player;
+import com.brejral.isis.game.ui.GameUIConstants;
+import com.brejral.isis.game.ui.GameUIHelper;
+import com.brejral.isis.game.ui.ship.MiningShip;
 import com.brejral.isis.game.ui.ship.Ship;
 
 public class MapVertex extends Actor {
@@ -31,7 +36,7 @@ public class MapVertex extends Actor {
 	}
 	
 	public void addListeners() {
-		addListener(new InputListener() {
+		addListener(new ClickListener() {
 			@Override
 			public void enter(InputEvent event, float x, float y, int pointer,
 					Actor fromActor) {
@@ -44,6 +49,11 @@ public class MapVertex extends Actor {
 					Actor toActor) {
 				isTouched = false;
 				super.exit(event, x, y, pointer, toActor);
+			}
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				GameHelper.mapVertexSelected((MapVertex) event.getTarget());
+				super.clicked(event, x, y);
 			}
 		});
 	}
@@ -107,6 +117,10 @@ public class MapVertex extends Actor {
 	public TradingStation getTradingStation() {
 		return tradingStation;
 	}
+	
+	public void setCanBeSelected(boolean canBeSelected) {
+		this.canBeSelected = canBeSelected;
+	}
 
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
@@ -122,4 +136,5 @@ public class MapVertex extends Actor {
 	public Actor hit(float x, float y, boolean touchable) {
 		return super.hit(x, y, touchable);
 	}
+	
 }

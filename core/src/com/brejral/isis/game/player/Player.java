@@ -90,4 +90,26 @@ public class Player {
 	public void addPoints(int value) {
 		points += value;
 	}
+
+	public MiningShip getNextAvailableMiningShip() {
+		for (MiningShip ship : miningShips) {
+			if (ship.isAvailable()) {
+				return ship;
+			}
+		}
+		return null;
+	}
+	
+	public SpaceBridge getNextAvailableSpaceBridge() {
+		for (SpaceBridge bridge : spaceBridges) {
+			if (bridge.isAvailable()) {
+				return bridge;
+			}
+		}
+		return null;
+	}
+	
+	public MiningShip getMiningShip(int index) {
+		return miningShips.get(index);
+	}
 }

@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.brejral.isis.game.GameHelper;
 import com.brejral.isis.game.ui.info.GameInfoPanel;
 import com.brejral.isis.game.ui.map.GameMap;
 
@@ -19,13 +18,13 @@ public class GameMapStage extends Stage implements GestureListener {
 
 	public GameMapStage() {
 		super();
-		GameHelper.setGameMapStage(this);
+		GameUIHelper.setGameMapStage(this);
 		this.setViewport(new ExtendViewport(getWidth(), getHeight(), new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight())));
 		this.getViewport().setScreenBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		map = new GameMap(5);
-		GameHelper.setMap(map);
+		GameUIHelper.setMap(map);
 		infoPanel = new GameInfoPanel();
-		GameHelper.setInfoPanel(infoPanel);
+		GameUIHelper.setInfoPanel(infoPanel);
 		addActorsToStage();
 	}
 

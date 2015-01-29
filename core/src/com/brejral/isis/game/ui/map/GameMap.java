@@ -8,6 +8,7 @@ import java.util.List;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.brejral.isis.Isis;
+import com.brejral.isis.game.ui.GameUIConstants;
 
 public class GameMap extends Group {
 	private int middle, ends;
@@ -37,7 +38,7 @@ public class GameMap extends Group {
 			numberOfTiles += 2 * i;
 		}
 		int height = (int) (1.5f * Tile.EDGE_LENGTH * numberOfRows + 2.5 * Tile.EDGE_LENGTH);
-		int width = (int) (2 * height / Math.sqrt(3));
+		int width = (int) (Tile.HEX_LENGTH * middle + 579);
 		setBounds(0, 0, width, height);
 		setBackgroundVertices();
 		initializeTiles();
@@ -223,11 +224,13 @@ public class GameMap extends Group {
 			}
 			vertex = mapTiles.get(index - val).getMapVertex(vec);
 		}
-		vertex = new MapVertex(vec.x, vec.y);
 		vertex.addTile(mapTile);
 		vertex.addVertex(mapTile.getMapVertices().get(4));
 		mapVertices.add(vertex);
 
+		if (row > 1) {
+			System.out.println();
+		}
 		mapTile.getMapVertices().get(0)
 				.addVertex(mapTile.getMapVertices().get(5));
 	}
@@ -242,6 +245,29 @@ public class GameMap extends Group {
 	}
 	
 	private void addTradingStations() {
-		mapTiles.get(0).getMapVertices().get(0).setTradingStation(tradingStations.get(0));
+		int[] info = null;
+		int[] pos = null;
+		if (middle == 5) {
+			info = GameUIConstants.TRADING_STATION_INFO_5;
+			pos = GameUIConstants.TRADING_STATION_INFO_5_POS;
+		} else if (middle == 6) {
+			info = GameUIConstants.TRADING_STATION_INFO_6;
+			pos = GameUIConstants.TRADING_STATION_INFO_6_POS;
+		}
+		for (int i = 0; i < info.length; i += 3) {
+			mapTiles.get(info[i]).getMapVertices().get(info[i+1]).setTradingStation(tradingStations.get(i/3));
+			mapTiles.get(info[i]).getMapVertices().get(info[i+2]).setTradingStation(tradingStations.get(i/3));
+		}
+		
+		for (int i = 0; i < pos.length; i+=3) {
+			tradingStations.get(i/3).setOrigin(pos[i], pos[i + 1], pos[i + 2]);
+		}
+		for (TradingStation station : tradingStations) {
+			addActor(station);
+		}
+	}
+	
+	public List<MapVertex> getMapVertices() {
+		return mapVertices;
 	}
 }
